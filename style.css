@@ -292,3 +292,81 @@ footer h2 { font-family: var(--font-serif); font-size: 4rem; margin-bottom: 1rem
 .fade-in:nth-child(2) { animation-delay: 1.4s; }
 .fade-in:nth-child(3) { animation-delay: 1.6s; }
 .fade-in:nth-child(4) { animation-delay: 1.8s; }
+/* --- MOBILE RESPONSIVENESS (Add to bottom of style.css) --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Disable Custom Cursor on Touch Devices (It's annoying on phone) */
+    * { cursor: auto !important; }
+    .cursor-dot, .cursor-outline { display: none !important; }
+
+    /* 2. Adjust Navigation */
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 249, 240, 0.98); /* Less transparent on mobile */
+    }
+    .nav-links {
+        gap: 1.5rem;
+        font-size: 0.7rem;
+    }
+
+    /* 3. Fix Hero Section (Stack Image and Text) */
+    header {
+        flex-direction: column-reverse; /* Puts image on top, text below */
+        height: auto;
+        padding-top: 140px; /* Space for the stacked navbar */
+        padding-bottom: 60px;
+        text-align: center;
+    }
+    .hero-content {
+        padding-right: 0;
+        margin-top: 2rem;
+    }
+    .hero-content h1 {
+        font-size: 3.5rem; /* Smaller font for mobile */
+    }
+    .hero-image {
+        height: 400px;
+        width: 100%;
+    }
+    .image-wrapper {
+        width: 90%;
+        border-radius: 100px 100px 0 0; /* Adjust arch for narrower screen */
+    }
+
+    /* 4. Fix Story Section (Stack Grid) */
+    section { padding: 60px 5%; } /* Less padding */
+    
+    .story-grid {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 3rem;
+        text-align: center;
+    }
+    .story-img {
+        order: -1; /* Move image to top */
+    }
+    .quote {
+        padding-left: 0;
+        margin-top: 1.5rem;
+    }
+    /* Move the green line to top center for quote */
+    .quote::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: -15px;
+        bottom: auto;
+        width: 40px;
+        height: 3px;
+    }
+
+    /* 5. Fix Category Cards */
+    .section-header h2 { font-size: 2.5rem; }
+    .category-grid { grid-template-columns: 1fr; } /* One card per row */
+    .category-card { height: 400px; } /* Slightly shorter cards */
+
+    /* 6. Footer Adjustments */
+    footer { padding: 3rem 5%; }
+    footer h2 { font-size: 3rem; }
+    .socials { display: flex; flex-direction: column; gap: 1rem; }
+}
