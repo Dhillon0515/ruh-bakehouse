@@ -334,6 +334,15 @@ footer h2 { font-family: var(--font-serif); font-size: 4rem; margin-bottom: 1rem
         width: 90%;
         border-radius: 100px 100px 0 0; /* Adjust arch for narrower screen */
     }
+    /* FIX FOR SHRINKING LOGO */
+    .hero-centerpiece {
+        width: 100% !important; /* Forces logo to fill the arch width */
+        padding: 20px; /* Adds a little breathing room so it doesn't touch edges */
+    }
+
+    .image-wrapper {
+        height: 350px; /* Adjust height so the arch looks proportionate */
+    }
 
     /* 4. Fix Story Section (Stack Grid) */
     section { padding: 60px 5%; } /* Less padding */
@@ -369,4 +378,5 @@ footer h2 { font-family: var(--font-serif); font-size: 4rem; margin-bottom: 1rem
     footer { padding: 3rem 5%; }
     footer h2 { font-size: 3rem; }
     .socials { display: flex; flex-direction: column; gap: 1rem; }
+    
 }
