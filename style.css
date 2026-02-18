@@ -1,0 +1,294 @@
+/* --- Variables & Reset --- */
+:root {
+    /* Color Palette Extracted from Logo */
+    --bg-cream: #FFF9F0;       /* Warm Eggshell Background */
+    --text-primary: #1A4D3E;   /* Deep Forest Green (Text/Logo Border) */
+    --accent-pink: #E8B4B8;    /* Dusty Rose (Logo Accents/Blob blur) */
+    --bg-pink-arch: #F3E1E3;   /* NEW: Solid lighter pink for the arch background */
+    --accent-sage: #D4DBCB;    /* Soft Sage (Secondary Backgrounds) */
+    --white: #FFFFFF;
+    
+    /* Typography */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Hides default cursor */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-cream);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+}
+
+/* --- Custom Cursor --- */
+.cursor-dot, .cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+}
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(26, 77, 62, 0.5); /* Semi-transparent Green */
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* --- Loader --- */
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-cream);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s ease-in-out;
+}
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loader-logo {
+    width: 150px;
+    height: auto;
+    animation: pulse 2s infinite;
+    mix-blend-mode: multiply; /* Blends image bg with page bg */
+}
+
+/* --- Navigation (UPDATED) --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 249, 240, 0.9); /* Slight transparency */
+    backdrop-filter: blur(10px);
+}
+
+/* New Text Logo Styling */
+.nav-text-logo {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    font-weight: 700; /* Bold */
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 3rem; list-style: none; }
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--text-primary); 
+    text-transform: uppercase; 
+    font-size: 0.75rem; 
+    letter-spacing: 2px; 
+    font-weight: 600;
+    transition: color 0.3s; 
+}
+.nav-links a:hover { color: var(--accent-pink); }
+
+/* --- Hero Section (UPDATED) --- */
+header {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px; /* Space for navbar */
+}
+.hero-content { flex: 1; z-index: 2; padding-right: 50px; }
+.hero-content h1 {
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+.italic { font-style: italic; font-weight: 400; color: var(--accent-pink); }
+.subtitle { 
+    display: block; 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    font-size: 0.8rem; 
+    margin-bottom: 1rem; 
+    color: #8a7a70; 
+}
+.btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 15px 40px;
+    border: 1px solid var(--text-primary);
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+.btn:hover { 
+    background: var(--text-primary); 
+    color: var(--bg-cream); 
+    transform: translateY(-3px); 
+}
+
+/* Hero Image Container */
+.hero-image { flex: 1; position: relative; height: 80vh; display: flex; align-items: center; justify-content: center; z-index: 1;}
+
+/* The Arch Shape Wrapper (UPDATED) */
+.image-wrapper {
+    width: 80%;
+    height: 90%;
+    overflow: hidden;
+    border-radius: 200px 200px 0 0; /* Arch Shape */
+    background-color: var(--bg-pink-arch); /* Solid pink background for the arch */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* The Logo inside the Arch (UPDATED) */
+.hero-centerpiece {
+    width: 70%; /* Controls size of logo inside arch */
+    height: auto;
+    object-fit: contain; /* Ensures entire logo is visible */
+    mix-blend-mode: multiply; /* Blends the logo background into the pink arch */
+    transition: transform 2s;
+}
+
+.image-wrapper:hover .hero-centerpiece { transform: scale(1.05); }
+
+/* --- Marquee --- */
+.marquee { 
+    background: var(--text-primary); 
+    color: var(--bg-cream); 
+    padding: 15px 0; 
+    overflow: hidden; 
+    white-space: nowrap; 
+}
+.track { 
+    display: inline-block; 
+    animation: scroll 25s linear infinite; 
+    font-family: var(--font-serif); 
+    font-style: italic; 
+    font-size: 1.2rem; 
+    opacity: 0.9; 
+}
+
+/* --- Sections --- */
+section { padding: 120px 5%; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Story Section */
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.story-img img { width: 100%; border-radius: 10px; box-shadow: 15px 15px 0px var(--accent-sage); }
+.story-text h2 { font-family: var(--font-serif); font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+.quote { 
+    margin-top: 2rem; 
+    font-family: var(--font-serif); 
+    font-size: 1.8rem; 
+    color: var(--accent-pink); 
+    font-style: italic; 
+    position: relative; 
+    padding-left: 20px; 
+}
+.quote::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--text-primary); }
+
+/* --- Offerings / Creations --- */
+.section-header { text-align: center; margin-bottom: 5rem; }
+.section-header h2 { font-family: var(--font-serif); font-size: 3.5rem; margin-bottom: 10px; }
+.section-header p { color: #8a7a70; font-style: italic; }
+
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+.category-card {
+    position: relative;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    background: var(--white);
+}
+.card-image { width: 100%; height: 100%; overflow: hidden; }
+.card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; filter: brightness(0.9); }
+.category-card:hover .card-image img { transform: scale(1.1); filter: brightness(1); }
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(26, 77, 62, 0.95), transparent); /* Green Gradient */
+    color: var(--bg-cream);
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+.category-card:hover .card-content { transform: translateY(0); }
+.card-content h3 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 10px; }
+.card-content p { font-size: 0.9rem; margin-bottom: 15px; opacity: 0.9; line-height: 1.5; }
+.explore-link { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid var(--accent-pink); padding-bottom: 2px; color: var(--accent-pink); }
+
+/* --- Footer --- */
+footer { 
+    background: var(--text-primary); 
+    color: var(--bg-cream); 
+    padding: 5rem 5% 2rem; 
+    text-align: center; 
+}
+.footer-logo img {
+    width: 120px; /* Slightly bigger looks better */
+    height: auto;
+    margin-bottom: 20px;
+    mix-blend-mode: normal; /* Ensures natural colors */
+    border-radius: 5px; /* Makes the corners of the image look smoother */
+}
+footer h2 { font-family: var(--font-serif); font-size: 4rem; margin-bottom: 1rem; }
+.socials { margin: 2rem 0; }
+.socials a { color: var(--bg-cream); margin: 0 15px; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; transition: color 0.3s; }
+.socials a:hover { color: var(--accent-pink); }
+.copyright { opacity: 0.3; font-size: 0.7rem; margin-top: 3rem; letter-spacing: 1px; }
+
+/* --- Animations --- */
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes pulse { 0% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; transform: scale(1); } }
+@keyframes blobFloat { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-20px) scale(1.1); } }
+.fade-in { opacity: 0; transform: translateY(30px); animation: fadeUp 1s forwards; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.scroll-reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
+.scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Delays */
+.fade-in:nth-child(1) { animation-delay: 1.2s; }
+.fade-in:nth-child(2) { animation-delay: 1.4s; }
+.fade-in:nth-child(3) { animation-delay: 1.6s; }
+.fade-in:nth-child(4) { animation-delay: 1.8s; }
